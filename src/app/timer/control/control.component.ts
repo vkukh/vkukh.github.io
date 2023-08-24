@@ -50,7 +50,7 @@ export class ControlComponent {
     const numValue = parseInt(inputElement.value, 10);
   
     if (numValue >= 1 && numValue <= 99) {
-      inputElement.value = numValue < 10 ? `0${numValue}` : `${numValue}`;
+      inputElement.value = this.formatValue(numValue);
     } else {
       inputElement.value = '01';
     }
@@ -60,5 +60,28 @@ export class ControlComponent {
     if (!event.key.match(allowedKeys)) {
       event.preventDefault();
     }
+  }
+  private formatValue(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`; 
+  }
+
+  public addValue(input: HTMLInputElement) {
+    let numValue = parseInt(input.value, 10);
+    if (!isNaN(numValue) && numValue < 59) {
+      numValue += 1;
+    } else {
+      numValue = 1;
+    }
+    input.value = this.formatValue(numValue);
+  }
+
+  removeValue(input: HTMLInputElement) {
+    let numValue = parseInt(input.value, 10);
+    if (!isNaN(numValue) && numValue > 1) {
+      numValue -= 1;
+    } else {
+      numValue = 99;
+    }
+    input.value = this.formatValue(numValue);
   }
 }

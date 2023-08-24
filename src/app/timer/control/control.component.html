@@ -33,10 +33,12 @@
         <button 
           mat-icon-button 
           color="primary"
-          [disabled]="isDisableControl">
+          [disabled]="isDisableControl"
+          (click)="addValue(roundInput)">
           <mat-icon>add</mat-icon>
         </button>
-        <input 
+        <input
+          #roundInput
           matInput
           maxLength="2"
           [(ngModel)]="roundCount"
@@ -47,7 +49,8 @@
         <button 
           mat-icon-button 
           color="primary"
-          [disabled]="isDisableControl">
+          [disabled]="isDisableControl"
+          (click)="removeValue(roundInput)">
           <mat-icon>remove</mat-icon>
         </button>
       </div>
@@ -61,10 +64,12 @@
         <button 
           mat-icon-button 
           color="primary"
-          [disabled]="isDisableControl">
+          [disabled]="isDisableControl"
+          (click)="addValue(warmInput)">
           <mat-icon>add</mat-icon>
         </button>
-        <input 
+        <input
+          #warmInput
           matInput
           maxLength="2"
           [(ngModel)]="warmUpCount"
@@ -75,7 +80,8 @@
         <button 
           mat-icon-button 
           color="primary"
-          [disabled]="isDisableControl">
+          [disabled]="isDisableControl"
+          (click)="removeValue(warmInput)">
           <mat-icon>remove</mat-icon>
         </button>
       </div>
@@ -87,12 +93,14 @@
       Phases
       <div fxLayout="row">
         <button 
-          mat-icon-button 
+          mat-icon-button
           color="primary"
-          [disabled]="isDisableControl">
+          [disabled]="isDisableControl"
+          (click)="addValue(phaseInput)">
           <mat-icon>add</mat-icon>
         </button>
-        <input 
+        <input
+          #phaseInput
           matInput
           maxLength="2"
           [(ngModel)]="phaseCount"
@@ -103,7 +111,8 @@
         <button 
           mat-icon-button 
           color="primary"
-          [disabled]="isDisableControl">
+          [disabled]="isDisableControl"
+          (click)="removeValue(phaseInput)">
           <mat-icon>remove</mat-icon>
         </button>
       </div>
