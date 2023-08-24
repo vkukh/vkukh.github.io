@@ -1,6 +1,23 @@
 mat-grid-list, .custom-tile {
   border: 0.1px dashed rgb(90, 153, 255);
 }
+.custom-input {
+  width: 2ch;
+  border: none;
+  background-color: #e2f1fe;
+  font-size: large;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.custom-tile span {
+  position: absolute;
+  top: 1px;
+}
+
 mat-slide-toggle {
-  padding-left: 10px;
+  position: absolute;
+  top: 34px;
 }

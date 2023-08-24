@@ -1,4 +1,4 @@
-<mat-grid-list cols="3" rowHeight="2:1">
+<mat-grid-list cols="3" rowHeight="70px">
   <mat-grid-tile class="custom-tile" rowspan="2">
     <button 
       mat-icon-button 
@@ -16,25 +16,97 @@
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile" >
-    <div fxLayout="column" fxLayoutAlign="center">
-      CountUP
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <span>CountUP</span>
       <mat-slide-toggle
             [color]="countUpColor"
-            [disabled]="isCountUp"
+            [disabled]="isDisableControl"
             (change)="onCountUp($event)">
         </mat-slide-toggle>
     </div>
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">
-    Rounds
+    <div fxLayout="column" fxLayoutAlign="center center">
+      Rounds
+      <div fxLayout="row">
+        <button 
+          mat-icon-button 
+          color="primary"
+          [disabled]="isDisableControl">
+          <mat-icon>add</mat-icon>
+        </button>
+        <input 
+          matInput
+          maxLength="2"
+          [(ngModel)]="roundCount"
+          class="custom-input"
+          [disabled]="isDisableControl"
+          (blur)="onInputChange($event)"
+          (keypress)="onKeyPress($event)">
+        <button 
+          mat-icon-button 
+          color="primary"
+          [disabled]="isDisableControl">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </div>
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">
-    WarmUP(s)
+    <div fxLayout="column" fxLayoutAlign="center center">
+      WarmUP(s)
+      <div fxLayout="row">
+        <button 
+          mat-icon-button 
+          color="primary"
+          [disabled]="isDisableControl">
+          <mat-icon>add</mat-icon>
+        </button>
+        <input 
+          matInput
+          maxLength="2"
+          [(ngModel)]="warmUpCount"
+          class="custom-input"
+          [disabled]="isDisableControl"
+          (blur)="onInputChange($event)"
+          (keypress)="onKeyPress($event)">
+        <button 
+          mat-icon-button 
+          color="primary"
+          [disabled]="isDisableControl">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </div>
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">
-    Phases
+    <div fxLayout="column" fxLayoutAlign="center center">
+      Phases
+      <div fxLayout="row">
+        <button 
+          mat-icon-button 
+          color="primary"
+          [disabled]="isDisableControl">
+          <mat-icon>add</mat-icon>
+        </button>
+        <input 
+          matInput
+          maxLength="2"
+          [(ngModel)]="phaseCount"
+          class="custom-input"
+          [disabled]="isDisableControl"
+          (blur)="onInputChange($event)"
+          (keypress)="onKeyPress($event)">
+        <button 
+          mat-icon-button 
+          color="primary"
+          [disabled]="isDisableControl">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </div>
   </mat-grid-tile>
 </mat-grid-list>
