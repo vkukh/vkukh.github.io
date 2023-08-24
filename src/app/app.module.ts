@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { TimerComponent } from './timer/timer.component';
 import { ControlComponent } from './timer/control/control.component';
 import { PhaseComponent } from './timer/phase/phase.component';
+import { SharedService } from './services/shared.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { PhaseComponent } from './timer/phase/phase.component';
     MatInputModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

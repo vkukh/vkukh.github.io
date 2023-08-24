@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { SharedService } from 'src/app/services/shared.service';
 
 import { States } from '../../models/state.model';
 
@@ -17,9 +18,21 @@ export class ControlComponent {
   public isDisableControl: boolean = false;
   public roundCount: string = '01';
   public warmUpCount: string = '01';
-  public phaseCount: string = '01';
+  private _phaseCount: string = '01';
+
+  constructor(private readonly sharedService: SharedService) {}
 
   @Output() changeTimerState = new EventEmitter<States>();
+
+  public get phaseCount(): string {
+    return this._phaseCount;
+  }
+
+  public set phaseCount(value: string) {
+    console.log(value)
+    this.sharedService.setData(value);
+    this._phaseCount = value;
+  }
 
   public togglePlayPause(): void {
     this.isPlayActive = !this.isPlayActive;
