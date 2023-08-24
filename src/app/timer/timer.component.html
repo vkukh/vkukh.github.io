@@ -5,11 +5,12 @@
     (closed)="onPanelOpened(false)" 
     [ngStyle]="{'background-color': isPanelOpen ? '#F0F8FF' : '#1E90FF'}">
     <mat-expansion-panel-header>
-      <mat-panel-description>
-        Ironsky Timer
+      <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
+        <span>Ironsky Timer</span>
+        <span><mat-icon class="custom-icon" [style.color]="iconColor">lens</mat-icon></span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <app-control></app-control>
+    <app-control (changeTimerState)="onStateReceived($event)"></app-control>
     <app-phase></app-phase>
   </mat-expansion-panel>
 </mat-accordion>

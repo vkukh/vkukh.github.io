@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+
+import { States } from '../../models/state.model';
 
 @Component({
   selector: 'app-control',
@@ -6,17 +8,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./control.component.scss']
 })
 export class ControlComponent {
-  public isPlay: boolean = true;
+  public isPlayActive: boolean = true;
   public isReplayEnable: boolean = false;
 
+  @Output() changeTimerState = new EventEmitter<States>();
+
   public togglePlayPause() {
-    this.isPlay = !this.isPlay;
+    this.isPlayActive = !this.isPlayActive;
     this.isReplayEnable = !this.isReplayEnable;
 
-    if (this.isPlay) {
-      console.log('Play:');
+    if (this.isPlayActive) {
+      console.log(this.isPlayActive)
     } else {
-      console.log('Pause:');
+      console.log(this.isPlayActive)
+      this.changeTimerState.emit(States.Play);
     }
+  }
+  public onReplay() {
+    this.changeTimerState.emit(States.RePlay);
   }
 }

@@ -1,21 +1,32 @@
 <mat-grid-list cols="3" rowHeight="2:1">
   <mat-grid-tile class="custom-tile" rowspan="2">
-    <button mat-icon-button color="primary" (click)="togglePlayPause()">
-      <mat-icon>{{ isPlay ? 'play_arrow' : 'pause' }}</mat-icon>
+    <button 
+      mat-icon-button 
+      color="primary" 
+      (click)="togglePlayPause()">
+      <mat-icon>{{ isPlayActive ? 'play_arrow' : 'pause' }}</mat-icon>
     </button>
-    <button mat-icon-button color="accent" [disabled]="isReplayEnable">
+    <button 
+      mat-icon-button 
+      color="accent" 
+      [disabled]="isReplayEnable"
+      (click)="onReplay()">
       <mat-icon>replay</mat-icon>
     </button>
   </mat-grid-tile>
+
   <mat-grid-tile class="custom-tile">
     CountUP
   </mat-grid-tile>
+
   <mat-grid-tile class="custom-tile">
     Rounds
   </mat-grid-tile>
+
   <mat-grid-tile class="custom-tile">
     WarmUP
   </mat-grid-tile>
+
   <mat-grid-tile class="custom-tile">
     Phases
   </mat-grid-tile>
