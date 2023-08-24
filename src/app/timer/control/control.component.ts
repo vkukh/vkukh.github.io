@@ -1,4 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { States } from '../../models/state.model';
 
@@ -11,20 +13,32 @@ export class ControlComponent {
   public isPlayActive: boolean = true;
   public isReplayEnable: boolean = false;
 
+  public countUpColor: ThemePalette = 'primary';
+  public isCountUp: boolean = false;
+
   @Output() changeTimerState = new EventEmitter<States>();
 
-  public togglePlayPause() {
+  public togglePlayPause(): void {
     this.isPlayActive = !this.isPlayActive;
     this.isReplayEnable = !this.isReplayEnable;
 
     if (this.isPlayActive) {
-      console.log(this.isPlayActive)
+      console.log(this.isPlayActive);
     } else {
-      console.log(this.isPlayActive)
       this.changeTimerState.emit(States.Play);
+      this.isCountUp = true;
     }
   }
-  public onReplay() {
+  public onReplay(): void {
     this.changeTimerState.emit(States.RePlay);
+    this.isCountUp = false;
+  }
+  public onCountUp(event: MatSlideToggleChange): void {
+    const { checked } = event;
+    if (checked) {
+      console.log('countUp');
+    } else {
+      console.log('countDown');
+    }
   }
 }

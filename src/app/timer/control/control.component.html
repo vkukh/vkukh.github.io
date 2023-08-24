@@ -15,8 +15,15 @@
     </button>
   </mat-grid-tile>
 
-  <mat-grid-tile class="custom-tile">
-    CountUP
+  <mat-grid-tile class="custom-tile" >
+    <div fxLayout="column" fxLayoutAlign="center">
+      CountUP
+      <mat-slide-toggle
+            [color]="countUpColor"
+            [disabled]="isCountUp"
+            (change)="onCountUp($event)">
+        </mat-slide-toggle>
+    </div>
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">
@@ -24,7 +31,7 @@
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">
-    WarmUP
+    WarmUP(s)
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">

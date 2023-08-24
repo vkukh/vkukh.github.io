@@ -6,6 +6,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppComponent } from './app.component';
 import { TimerComponent } from './timer/timer.component';
@@ -28,6 +29,7 @@ import { PhaseComponent } from './timer/phase/phase.component';
     MatGridListModule,
     MatButtonModule,
     MatIconModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

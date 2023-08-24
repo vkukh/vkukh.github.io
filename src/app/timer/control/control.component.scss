@@ -1,3 +1,6 @@
 mat-grid-list, .custom-tile {
-  border: 0.1px solid rgb(90, 153, 255);
+  border: 0.1px dashed rgb(90, 153, 255);
+}
+mat-slide-toggle {
+  padding-left: 10px;
 }
