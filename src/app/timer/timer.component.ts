@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./timer.component.scss']
 })
 export class TimerComponent {
+  public isPanelOpen = false;
 
+  public onPanelOpened(open: boolean) {
+    this.isPanelOpen = open;
+  }
 }
