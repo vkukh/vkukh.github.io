@@ -18,6 +18,7 @@ import { SharedService } from './services/shared.service';
 import { PhaseCounterComponent } from './timer/control/phase-counter/phase-counter.component';
 import { RoundCounterComponent } from './timer/control/round-counter/round-counter.component';
 import { WarmUpCounterComponent } from './timer/control/warm-up-counter/warm-up-counter.component';
+import { CountUpToggleComponent } from './timer/control/count-up-toggle/count-up-toggle.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { WarmUpCounterComponent } from './timer/control/warm-up-counter/warm-up-
     PhaseComponent,
     PhaseCounterComponent,
     RoundCounterComponent,
-    WarmUpCounterComponent
+    WarmUpCounterComponent,
+    CountUpToggleComponent
   ],
   imports: [
     BrowserModule,

@@ -16,14 +16,7 @@
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile" >
-    <div fxLayout="column" fxLayoutAlign="center center">
-      <span>CountUP</span>
-      <mat-slide-toggle
-            [color]="countUpColor"
-            [disabled]="isDisableControl"
-            (change)="onCountUp($event)">
-        </mat-slide-toggle>
-    </div>
+    <app-count-up-toggle [isDisableControl]="isDisableControl"></app-count-up-toggle>
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">
