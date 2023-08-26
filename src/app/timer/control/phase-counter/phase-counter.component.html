@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  Phases
+  <div fxLayout="row">
+    <button 
+      mat-icon-button
+      color="primary"
+      [disabled]="isDisableControl"
+      (click)="onAddValue(phaseCount)">
+      <mat-icon>add</mat-icon>
+    </button>
+    <input
+      matInput
+      maxLength="2"
+      [(ngModel)]="phaseCount"
+      class="custom-input"
+      [disabled]="isDisableControl"
+      (blur)="onInputChange($event)"
+      (keypress)="onKeyPress($event)">
+    <button 
+      mat-icon-button 
+      color="primary"
+      [disabled]="isDisableControl"
+      (click)="onRemoveValue(phaseCount)">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </div>
+</div>

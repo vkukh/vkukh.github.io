@@ -15,6 +15,7 @@ import { TimerComponent } from './timer/timer.component';
 import { ControlComponent } from './timer/control/control.component';
 import { PhaseComponent } from './timer/phase/phase.component';
 import { SharedService } from './services/shared.service';
+import { PhaseCounterComponent } from './timer/control/phase-counter/phase-counter.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SharedService } from './services/shared.service';
     AppComponent,
     TimerComponent,
     ControlComponent,
-    PhaseComponent
+    PhaseComponent,
+    PhaseCounterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,15 @@
+.custom-input {
+  width: 2ch;
+  border: none;
+  background-color: #e2f1fe;
+  font-size: large;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.custom-tile span {
+  position: absolute;
+  top: 1px;
+}

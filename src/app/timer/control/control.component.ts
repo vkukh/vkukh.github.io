@@ -18,21 +18,10 @@ export class ControlComponent {
   public isDisableControl: boolean = false;
   public roundCount: string = '01';
   public warmUpCount: string = '01';
-  private _phaseCount: string = '01';
 
   constructor(private readonly sharedService: SharedService) {}
 
   @Output() changeTimerState = new EventEmitter<States>();
-
-  public get phaseCount(): string {
-    return this._phaseCount;
-  }
-
-  public set phaseCount(value: string) {
-    console.log(value)
-    this.sharedService.setData(value);
-    this._phaseCount = value;
-  }
 
   public togglePlayPause(): void {
     this.isPlayActive = !this.isPlayActive;
@@ -88,7 +77,7 @@ export class ControlComponent {
     input.value = this.formatValue(numValue);
   }
 
-  removeValue(input: HTMLInputElement) {
+  public removeValue(input: HTMLInputElement) {
     let numValue = parseInt(input.value, 10);
     if (!isNaN(numValue) && numValue > 1) {
       numValue -= 1;
