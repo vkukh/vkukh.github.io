@@ -16,7 +16,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
   
   constructor(private sharedService: SharedService) {}
 
-  @Input() timerState: States = States.Stop;;
+  @Input() isNotPlay: boolean = true;
 
   public ngOnInit(): void {
       this.commonSubscription.add(
@@ -31,11 +31,5 @@ export class PhaseComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
 		this.commonSubscription.unsubscribe();
-  }
-
-
-  public get isSettingsMenu(): boolean {
-    console.log(this.timerState !== States.Play)
-    return this.timerState !== States.Play;
   }
 }

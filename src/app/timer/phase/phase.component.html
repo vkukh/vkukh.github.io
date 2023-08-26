@@ -10,10 +10,10 @@
     matBadgePosition="before"
     [ngStyle]="{
       'border': labelPosition === 'rest' ? '3px solid red' : '3px solid blue',
-      'opacity': isSettingsMenu ? '100%' : '10%'
+      'opacity': isNotPlay ? '100%' : '10%'
     }">
 
-    <mat-radio-group [(ngModel)]="labelPosition" *ngIf="isSettingsMenu">
+    <mat-radio-group [(ngModel)]="labelPosition" *ngIf="isNotPlay">
       <mat-radio-button value="active">active</mat-radio-button>
       <mat-radio-button value="rest">rest</mat-radio-button>
       <mat-radio-button value="remove" disabled>remove</mat-radio-button>
@@ -27,7 +27,7 @@
           value="00"
           maxLength="2"
           class="custom-input"
-          [disabled]="!isSettingsMenu">
+          [disabled]="!isNotPlay">
       </div>
       <span class="input-split">:</span>
       <div class="right-input">
@@ -37,7 +37,7 @@
           value="20"
           maxLength="2"
           class="custom-input"
-          [disabled]="!isSettingsMenu">
+          [disabled]="!isNotPlay">
       </div>
     </div>
   </div>
