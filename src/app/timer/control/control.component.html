@@ -27,65 +27,11 @@
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">
-    <div fxLayout="column" fxLayoutAlign="center center">
-      Rounds
-      <div fxLayout="row">
-        <button 
-          mat-icon-button 
-          color="primary"
-          [disabled]="isDisableControl"
-          (click)="addValue(roundInput)">
-          <mat-icon>add</mat-icon>
-        </button>
-        <input
-          #roundInput
-          matInput
-          maxLength="2"
-          [(ngModel)]="roundCount"
-          class="custom-input"
-          [disabled]="isDisableControl"
-          (blur)="onInputChange($event)"
-          (keypress)="onKeyPress($event)">
-        <button 
-          mat-icon-button 
-          color="primary"
-          [disabled]="isDisableControl"
-          (click)="removeValue(roundInput)">
-          <mat-icon>remove</mat-icon>
-        </button>
-      </div>
-    </div>
+    <app-round-counter [isDisableControl]="isDisableControl"></app-round-counter>
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">
-    <div fxLayout="column" fxLayoutAlign="center center">
-      WarmUP(s)
-      <div fxLayout="row">
-        <button 
-          mat-icon-button 
-          color="primary"
-          [disabled]="isDisableControl"
-          (click)="addValue(warmInput)">
-          <mat-icon>add</mat-icon>
-        </button>
-        <input
-          #warmInput
-          matInput
-          maxLength="2"
-          [(ngModel)]="warmUpCount"
-          class="custom-input"
-          [disabled]="isDisableControl"
-          (blur)="onInputChange($event)"
-          (keypress)="onKeyPress($event)">
-        <button 
-          mat-icon-button 
-          color="primary"
-          [disabled]="isDisableControl"
-          (click)="removeValue(warmInput)">
-          <mat-icon>remove</mat-icon>
-        </button>
-      </div>
-    </div>
+    <app-warm-up-counter [isDisableControl]="isDisableControl"></app-warm-up-counter>
   </mat-grid-tile>
 
   <mat-grid-tile class="custom-tile">

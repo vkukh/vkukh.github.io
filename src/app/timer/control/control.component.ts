@@ -16,8 +16,6 @@ export class ControlComponent {
 
   public countUpColor: ThemePalette = 'primary';
   public isDisableControl: boolean = false;
-  public roundCount: string = '01';
-  public warmUpCount: string = '01';
 
   constructor(private readonly sharedService: SharedService) {}
 
@@ -45,45 +43,5 @@ export class ControlComponent {
     } else {
       console.log('countDown');
     }
-  }
-
-  public onInputChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    const numValue = parseInt(inputElement.value, 10);
-  
-    if (numValue >= 1 && numValue <= 99) {
-      inputElement.value = this.formatValue(numValue);
-    } else {
-      inputElement.value = '01';
-    }
-  }
-  public onKeyPress(event: KeyboardEvent): void {
-    const allowedKeys = /^[0-9]$/;
-    if (!event.key.match(allowedKeys)) {
-      event.preventDefault();
-    }
-  }
-  private formatValue(value: number): string {
-    return value < 10 ? `0${value}` : `${value}`; 
-  }
-
-  public addValue(input: HTMLInputElement) {
-    let numValue = parseInt(input.value, 10);
-    if (!isNaN(numValue) && numValue < 59) {
-      numValue += 1;
-    } else {
-      numValue = 1;
-    }
-    input.value = this.formatValue(numValue);
-  }
-
-  public removeValue(input: HTMLInputElement) {
-    let numValue = parseInt(input.value, 10);
-    if (!isNaN(numValue) && numValue > 1) {
-      numValue -= 1;
-    } else {
-      numValue = 99;
-    }
-    input.value = this.formatValue(numValue);
   }
 }

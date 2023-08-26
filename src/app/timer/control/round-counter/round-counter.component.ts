@@ -3,37 +3,37 @@ import { KeyPressUntils } from 'src/app/utils/key-press.util';
 import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
 
 @Component({
-  selector: 'app-phase-counter',
-  templateUrl: './phase-counter.component.html',
-  styleUrls: ['./phase-counter.component.scss']
+  selector: 'app-round-counter',
+  templateUrl: './round-counter.component.html',
+  styleUrls: ['./round-counter.component.scss']
 })
-export class PhaseCounterComponent {
-  private _phaseCount: string = '01';
+export class RoundCounterComponent {
+  private _roundCount: string = '01';
 
   constructor(private readonly keyPressUtils: KeyPressUntils, 
     private readonly numberManipulationUtil: NumberManipulationUtil) {}
 
   @Input() isDisableControl: boolean = false;
 
-  public set phaseCount(value: string) {
-    // emit phase count
-    this._phaseCount = value;
+  public set roundCount(value: string) {
+    // emit round count
+    this._roundCount = value;
   }
 
-  public get phaseCount(): string {
-    return this._phaseCount;
+  public get roundCount(): string {
+    return this._roundCount;
   }
 
   public onInputChange(event: Event): void {
-    this.phaseCount = this.numberManipulationUtil.inputChange(event);
+    this.roundCount = this.numberManipulationUtil.inputChange(event);
   }
 
   public onAddValue(value: string): void {
-    this.phaseCount = this.numberManipulationUtil.addValue(value);
+    this.roundCount = this.numberManipulationUtil.addValue(value);
   }
 
   public onRemoveValue(value: string): void {
-    this.phaseCount = this.numberManipulationUtil.removeValue(value);
+    this.roundCount = this.numberManipulationUtil.removeValue(value);
   }
 
   public onKeyPress(event: KeyboardEvent): void {

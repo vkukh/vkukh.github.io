@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  Rounds
+  <div fxLayout="row">
+    <button 
+      mat-icon-button 
+      color="primary"
+      [disabled]="isDisableControl"
+      (click)="onAddValue(roundCount)">
+      <mat-icon>add</mat-icon>
+    </button>
+    <input
+      matInput
+      maxLength="2"
+      [(ngModel)]="roundCount"
+      class="custom-input"
+      [disabled]="isDisableControl"
+      (blur)="onInputChange($event)"
+      (keypress)="onKeyPress($event)">
+    <button 
+      mat-icon-button 
+      color="primary"
+      [disabled]="isDisableControl"
+      (click)="onRemoveValue(roundCount)">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </div>
+</div>
