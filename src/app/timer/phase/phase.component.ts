@@ -1,5 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { States } from 'src/app/models/state.model';
+
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -9,9 +11,12 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class PhaseComponent implements OnInit, OnDestroy {
   public phases: number[] = [1];
+  public labelPosition: 'active' | 'rest' | 'remove' = 'active'
   private commonSubscription: Subscription = new Subscription();
   
   constructor(private sharedService: SharedService) {}
+
+  @Input() timerState: States = States.Stop;;
 
   public ngOnInit(): void {
       this.commonSubscription.add(
@@ -26,5 +31,11 @@ export class PhaseComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
 		this.commonSubscription.unsubscribe();
+  }
+
+
+  public get isSettingsMenu(): boolean {
+    console.log(this.timerState !== States.Play)
+    return this.timerState !== States.Play;
   }
 }

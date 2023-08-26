@@ -1,16 +1,9 @@
 <mat-grid-list cols="3" rowHeight="70px">
   <mat-grid-tile class="custom-tile" rowspan="2">
-    <button 
-      mat-icon-button 
-      color="primary" 
-      (click)="togglePlayPause()">
+    <button mat-icon-button color="primary" (click)="onTogglePlayPause()">
       <mat-icon>{{ isPlayActive ? 'play_arrow' : 'pause' }}</mat-icon>
     </button>
-    <button 
-      mat-icon-button 
-      color="accent" 
-      [disabled]="isReplayEnable"
-      (click)="onReplay()">
+    <button mat-icon-button color="accent" [disabled]="!isPlayActive" (click)="onReplay()">
       <mat-icon>replay</mat-icon>
     </button>
   </mat-grid-tile>

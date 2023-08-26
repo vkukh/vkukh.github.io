@@ -8,7 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
+import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import { TimerComponent } from './timer/timer.component';
@@ -43,6 +45,8 @@ import { CountUpToggleComponent } from './timer/control/count-up-toggle/count-up
     MatSlideToggleModule,
     MatInputModule,
     FormsModule,
+    MatBadgeModule,
+    MatRadioModule
   ],
   providers: [SharedService],
   bootstrap: [AppComponent]

@@ -17,6 +17,7 @@ export class PhaseCounterComponent {
 
   public set phaseCount(value: string) {
     // emit phase count
+    console.log(value);
     this._phaseCount = value;
   }
 

@@ -1,0 +1,40 @@
+.phase-item {
+  border: 3px solid blue;
+  border-radius: 5px;
+  width: 100%;
+  height: 160px;
+  margin-top: 30px;
+}
+
+.badge {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.custom-input {
+  width: 2ch;
+  border: none;
+  background-color: #F0F8FF;
+  font-size: 11ch;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.phase-item .input-split {
+  font-size: 11ch;
+}
+
+.left-input {
+  padding-right: 6%;
+}
+
+.right-input {
+  padding-left: 6%;
+}
+
+mat-radio-group {
+  position: absolute;
+  top: 0;
+}

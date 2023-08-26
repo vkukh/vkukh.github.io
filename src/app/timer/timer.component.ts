@@ -10,12 +10,14 @@ import { States, StateColors } from '../models/state.model';
 export class TimerComponent {
   public isPanelOpen = false;
   public iconColor: string = StateColors.Green;
+  public timerState: States = States.Stop;
 
   public onPanelOpened(open: boolean): void {
     this.isPanelOpen = open;
   }
 
   public onStateReceived(state: States): void {
+    this.timerState = state;
     const setState: {
       [key in States]?: () => StateColors;
     } = {
