@@ -20,8 +20,9 @@ export class PhaseComponent implements OnInit, OnDestroy {
     leftValue: '00',
     rightValue: '20',
     index: 0,
-    badge: 0
+    badge: 1
   }];
+  private readonly REST_BADGE: string = 'R';
   
   constructor(private readonly sharedService: SharedService,
     private readonly keyPressUtils: KeyPressUntils) {}
@@ -71,24 +72,19 @@ export class PhaseComponent implements OnInit, OnDestroy {
 
   public onStateChange(event: MatRadioChange):void {
     const { value } = event;
-    if (value && value === PhaseState.Rest) {
-      console.log(value);
+    if (value) {
+      this.updatePhaseItems();
     }
   }
 
   private updatePhaseItems(): void {
-
+    let shiftCount = 0;
+    this.phaseItems = this.phaseItems.map((item) => {
+      if (item.state === PhaseState.Rest) {
+        shiftCount++;
+        return { ...item, badge: this.REST_BADGE };
+      }
+      return { ...item, badge: item.index + 1 - shiftCount };
+    });
   }
-
-  // function convertWithShift(inputArray) {
-  //   let shiftCount = 0;
-  //   return inputArray.map((item) => {
-  //     if (item.state === 'rest') {
-  //       shiftCount++;
-  //       return { ...item, badge: 'R' };
-  //     }
-  //     return { ...item, badge: item.badge - shiftCount };
-  //   });
-  // }
-  
 }

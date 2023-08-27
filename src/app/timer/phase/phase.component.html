@@ -3,7 +3,7 @@
     *ngFor="let phase of phaseItems; let i = index;"
     fxLayout="column"
     fxLayoutAlign="center center"
-    [matBadge]="phaseItems[i].state === 'rest' ? 'R' : i + 1"
+    [matBadge]="phaseItems[i].badge"
     [matBadgeColor]="phaseItems[i].state === 'rest' ? 'warn' : 'primary'"
     matBadgePosition="before"
     [ngStyle]="{
@@ -11,9 +11,12 @@
       'opacity': isNotPlay ? '100%' : '10%'
     }">
 
-    <mat-radio-group [(ngModel)]="phaseItems[i].state" *ngIf="isNotPlay">
+    <mat-radio-group 
+      [(ngModel)]="phaseItems[i].state"
+      (change)="onStateChange($event)"
+      *ngIf="isNotPlay">
       <mat-radio-button value="work">work</mat-radio-button>
-      <mat-radio-button value="rest" (change)="onStateChange($event)">rest</mat-radio-button>
+      <mat-radio-button value="rest">rest</mat-radio-button>
       <mat-radio-button value="remove" [disabled]="!i ? true : false">remove</mat-radio-button>
     </mat-radio-group>
 
