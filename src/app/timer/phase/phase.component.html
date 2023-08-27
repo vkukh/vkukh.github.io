@@ -1,20 +1,20 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <div class="phase-item"
-    *ngFor="let phase of phasesToView; ; let i = index;"
+    *ngFor="let phase of phaseItems; let i = index;"
     fxLayout="column"
     fxLayoutAlign="center center"
-    [matBadge]="labelPositions[i] === 'rest' ? 'R' : i + 1"
-    [matBadgeColor]="labelPositions[i] === 'rest' ? 'warn' : 'primary'"
+    [matBadge]="phaseItems[i].state === 'rest' ? 'R' : i + 1"
+    [matBadgeColor]="phaseItems[i].state === 'rest' ? 'warn' : 'primary'"
     matBadgePosition="before"
     [ngStyle]="{
-      'border': labelPositions[i] === 'rest' ? '3px solid red' : '3px solid blue',
+      'border': phaseItems[i].state === 'rest' ? '3px solid red' : '3px solid blue',
       'opacity': isNotPlay ? '100%' : '10%'
     }">
 
-    <mat-radio-group [(ngModel)]="labelPositions[i]" *ngIf="isNotPlay">
-      <mat-radio-button value="active">active</mat-radio-button>
-      <mat-radio-button value="rest">rest</mat-radio-button>
-      <mat-radio-button value="remove" disabled>remove</mat-radio-button>
+    <mat-radio-group [(ngModel)]="phaseItems[i].state" *ngIf="isNotPlay">
+      <mat-radio-button value="work">work</mat-radio-button>
+      <mat-radio-button value="rest" (change)="onStateChange($event)">rest</mat-radio-button>
+      <mat-radio-button value="remove" [disabled]="!i ? true : false">remove</mat-radio-button>
     </mat-radio-group>
 
     <div fxLayout="row" fxLayoutAlign="center center">
@@ -22,9 +22,10 @@
         <input
           matInput
           type="text"
-          value="00"
+          [(ngModel)]="phaseItems[i].leftValue"
           maxLength="2"
           class="custom-input"
+          (keypress)="onKeyPress($event)"
           [disabled]="!isNotPlay">
       </div>
       <span class="input-split">:</span>
@@ -32,9 +33,10 @@
         <input
           matInput
           type="text"
-          value="20"
+          [(ngModel)]="phaseItems[i].rightValue"
           maxLength="2"
           class="custom-input"
+          (keypress)="onKeyPress($event)"
           [disabled]="!isNotPlay">
       </div>
     </div>
