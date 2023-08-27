@@ -5,21 +5,21 @@ import { Injectable } from "@angular/core";
 })
 export class NumberManipulationUtil {
 
-  public removeValue(value: string): string {
+  public removeValue(value: string, nominal: number): string {
     let numValue = parseInt(value, 10);
 
     if (!isNaN(numValue) && numValue > 1) {
       numValue -= 1;
     } else {
-      numValue = 99;
+      numValue = nominal;
     }
     return this.formatValue(numValue);
   }
 
-  public addValue(value: string): string {
+  public addValue(value: string, nominal: number): string {
     let numValue = parseInt(value, 10);
 
-    if (!isNaN(numValue) && numValue < 59) {
+    if (!isNaN(numValue) && numValue < nominal) {
       numValue += 1;
     } else {
       numValue = 1;
@@ -27,11 +27,11 @@ export class NumberManipulationUtil {
     return this.formatValue(numValue);
   }
 
-  public inputChange(event: Event): string {
+  public inputChange(event: Event, nominal: number): string {
     const inputElement = event.target as HTMLInputElement;
     const numValue = parseInt(inputElement.value, 10);
 
-    if (numValue >= 1 && numValue <= 99) {
+    if (numValue >= 1 && numValue <= nominal) {
       inputElement.value = this.formatValue(numValue);
     } else {
       inputElement.value = '01';

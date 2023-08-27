@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { States } from 'src/app/models/state.model';
 
 import { SharedService } from 'src/app/services/shared.service';
 
@@ -10,11 +9,11 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./phase.component.scss']
 })
 export class PhaseComponent implements OnInit, OnDestroy {
-  public phases: number[] = [1];
-  public labelPosition: 'active' | 'rest' | 'remove' = 'active'
+  public phasesToView: number[] = [1];
+  public labelPositions: ('active' | 'rest' | 'remove')[] = [];
   private commonSubscription: Subscription = new Subscription();
   
-  constructor(private sharedService: SharedService) {}
+  constructor(private readonly sharedService: SharedService) {}
 
   @Input() isNotPlay: boolean = true;
 
@@ -22,9 +21,11 @@ export class PhaseComponent implements OnInit, OnDestroy {
       this.commonSubscription.add(
         this.sharedService.getData()
           .subscribe(data => {
-            const dataToNumber = !data ? 0 : parseInt(data, 10);
-            if (!dataToNumber) return;
-            this.phases = new Array(dataToNumber).fill(1);
+            const { phases } = data;
+            if (phases && !(phases === '0' || phases === '00')) {
+              this.phasesToView = new Array(parseInt(phases, 10));
+              this.labelPositions = new Array(this.phasesToView.length).fill('active');
+            }
           })
       );
   }

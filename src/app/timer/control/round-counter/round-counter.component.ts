@@ -9,6 +9,7 @@ import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
 })
 export class RoundCounterComponent {
   private _roundCount: string = '01';
+  private nominal: number = 99;
 
   constructor(private readonly keyPressUtils: KeyPressUntils, 
     private readonly numberManipulationUtil: NumberManipulationUtil) {}
@@ -25,15 +26,15 @@ export class RoundCounterComponent {
   }
 
   public onInputChange(event: Event): void {
-    this.roundCount = this.numberManipulationUtil.inputChange(event);
+    this.roundCount = this.numberManipulationUtil.inputChange(event, this.nominal);
   }
 
   public onAddValue(value: string): void {
-    this.roundCount = this.numberManipulationUtil.addValue(value);
+    this.roundCount = this.numberManipulationUtil.addValue(value, this.nominal);
   }
 
   public onRemoveValue(value: string): void {
-    this.roundCount = this.numberManipulationUtil.removeValue(value);
+    this.roundCount = this.numberManipulationUtil.removeValue(value, this.nominal);
   }
 
   public onKeyPress(event: KeyboardEvent): void {

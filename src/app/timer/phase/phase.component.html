@@ -1,19 +1,17 @@
-<!-- <div *ngFor="let phase of phases">
-  <p>{{ phase }}</p>
-</div> -->
 <div fxLayout="column" fxLayoutAlign="center center">
-  <div class="phase-item"
+    <div class="phase-item"
+    *ngFor="let phase of phasesToView; ; let i = index;"
     fxLayout="column"
     fxLayoutAlign="center center"
-    [matBadge]="labelPosition === 'rest' ? 'R' : 1"
-    [matBadgeColor]="labelPosition === 'rest' ? 'warn' : 'primary'"
+    [matBadge]="labelPositions[i] === 'rest' ? 'R' : i + 1"
+    [matBadgeColor]="labelPositions[i] === 'rest' ? 'warn' : 'primary'"
     matBadgePosition="before"
     [ngStyle]="{
-      'border': labelPosition === 'rest' ? '3px solid red' : '3px solid blue',
+      'border': labelPositions[i] === 'rest' ? '3px solid red' : '3px solid blue',
       'opacity': isNotPlay ? '100%' : '10%'
     }">
 
-    <mat-radio-group [(ngModel)]="labelPosition" *ngIf="isNotPlay">
+    <mat-radio-group [(ngModel)]="labelPositions[i]" *ngIf="isNotPlay">
       <mat-radio-button value="active">active</mat-radio-button>
       <mat-radio-button value="rest">rest</mat-radio-button>
       <mat-radio-button value="remove" disabled>remove</mat-radio-button>

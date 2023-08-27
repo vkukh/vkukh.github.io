@@ -9,6 +9,7 @@ import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
 })
 export class WarmUpCounterComponent {
   private _warmUpCount: string = '01';
+  private nominal: number = 60;
 
   constructor(private readonly keyPressUtils: KeyPressUntils, 
     private readonly numberManipulationUtil: NumberManipulationUtil) {}
@@ -25,15 +26,15 @@ export class WarmUpCounterComponent {
   }
 
   public onInputChange(event: Event): void {
-    this.warmUpCount = this.numberManipulationUtil.inputChange(event);
+    this.warmUpCount = this.numberManipulationUtil.inputChange(event, this.nominal);
   }
 
   public onAddValue(value: string): void {
-    this.warmUpCount = this.numberManipulationUtil.addValue(value);
+    this.warmUpCount = this.numberManipulationUtil.addValue(value, this.nominal);
   }
 
   public onRemoveValue(value: string): void {
-    this.warmUpCount = this.numberManipulationUtil.removeValue(value);
+    this.warmUpCount = this.numberManipulationUtil.removeValue(value, this.nominal);
   }
 
   public onKeyPress(event: KeyboardEvent): void {
