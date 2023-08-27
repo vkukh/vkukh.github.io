@@ -9,11 +9,11 @@ export class SharedService {
 
   private sharedData = new BehaviorSubject<AppControlState>({});
 
-  setData(newValue: AppControlState): void {
+  public setData(newValue: AppControlState): void {
     this.sharedData.next(newValue);
   }
 
-  getData() {
+  public getData() {
     return this.sharedData.asObservable();
   }
 }
