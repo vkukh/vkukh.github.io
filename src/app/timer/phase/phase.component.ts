@@ -42,19 +42,30 @@ export class PhaseComponent implements OnInit, OnDestroy {
   }
 
   private setPhases(phasesCount: string): void {
-    this.phaseItems = new Array(parseInt(phasesCount, 10)).fill(null)
-      .map((_, index) => ({
-        opacity: '100%',
-        state: PhaseState.Work,
-        leftValue: '00',
-        rightValue: '20',
-        index,
-        badge: index + 1
-      }));
+    console.log(phasesCount)
+    const phaseItemsLength = this.phaseItems.length;
+    const diffCount = parseInt(phasesCount, 10) - phaseItemsLength;
+    if (diffCount >= 0) {
+      this.phaseItems = [...this.phaseItems, ...this.makePhases(diffCount)];
+    } else if (diffCount < 0) {
+      this.phaseItems.splice(diffCount);
+    }
+    this.updateBagesAndIndexes();
+  }
+
+  private makePhases(count: number): IPhase[] {
+    return new Array(count).fill(null)
+    .map((_, index) => ({
+      opacity: '100%',
+      state: PhaseState.Work,
+      leftValue: '00',
+      rightValue: '20',
+      index,
+      badge: index + 1
+    }));
   }
 
   private set phaseItems(phases: IPhase[]) {
-    console.log(phases);
     this._phaseItems = phases;
   }
 
