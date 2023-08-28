@@ -73,18 +73,24 @@ export class PhaseComponent implements OnInit, OnDestroy {
   public onStateChange(event: MatRadioChange):void {
     const { value } = event;
     if (value) {
-      this.updatePhaseItems();
+      this.updateBagesAndIndexes();
     }
   }
 
-  private updatePhaseItems(): void {
+  public onRemovePhase(index: number): void {
+    if (!index) return;
+    this.phaseItems.splice(index, 1);
+    this.updateBagesAndIndexes()
+  }
+
+  private updateBagesAndIndexes(): void {
     let shiftCount = 0;
-    this.phaseItems = this.phaseItems.map((item) => {
+    this.phaseItems = this.phaseItems.map((item, index) => {
       if (item.state === PhaseState.Rest) {
         shiftCount++;
-        return { ...item, badge: this.REST_BADGE };
+        return { ...item, badge: this.REST_BADGE, index };
       }
-      return { ...item, badge: item.index + 1 - shiftCount };
+      return { ...item, badge: index + 1 - shiftCount, index };
     });
   }
 }

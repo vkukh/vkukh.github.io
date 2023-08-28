@@ -17,7 +17,12 @@
       *ngIf="isNotPlay">
       <mat-radio-button value="work">work</mat-radio-button>
       <mat-radio-button value="rest">rest</mat-radio-button>
-      <mat-radio-button value="remove" [disabled]="!i ? true : false">remove</mat-radio-button>
+      <mat-radio-button 
+        value="remove"
+        (click)="onRemovePhase(i)"
+        [disabled]="!i ? true : false">
+        remove
+      </mat-radio-button>
     </mat-radio-group>
 
     <div fxLayout="row" fxLayoutAlign="center center">
