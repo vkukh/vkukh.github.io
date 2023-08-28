@@ -80,7 +80,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
   public onRemovePhase(index: number): void {
     if (!index) return;
     this.phaseItems.splice(index, 1);
-    this.updateBagesAndIndexes()
+    this.updateBagesAndIndexes();
   }
 
   private updateBagesAndIndexes(): void {
