@@ -36,10 +36,12 @@ export class PhaseComponent implements OnInit, OnDestroy {
         this.sharedService.getData()
           .subscribe(data => {
             const { phases, countup } = data;
-            if (phases && !(phases === '0' || phases === '00')) {
+            if (phases && !(phases === '0' || phases === '00') && phases !== undefined) {
               this.setPhases(phases);
             }
-            this.isCountUp = countup;
+            if (countup !== undefined) {
+              this.isCountUp = countup;
+            }
           })
       );
   }

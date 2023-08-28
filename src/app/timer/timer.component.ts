@@ -25,7 +25,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.commonSubscription.add(
       this.sharedService.getData()
         .subscribe((data: AppControlState) => {
-          this.isCountUp = data.countup;
+          const { countup } = data;
+          if (countup !== undefined) {
+            this.isCountUp = countup;
+          }
         })
     );
   }
