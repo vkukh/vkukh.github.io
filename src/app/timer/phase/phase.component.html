@@ -33,7 +33,8 @@
           maxLength="2"
           class="custom-input"
           (keypress)="onKeyPress($event)"
-          [disabled]="!isNotPlay">
+          [disabled]="!isNotPlay"
+          [ngStyle]="{'background-color': setInputBackgroundColor()}">
       </div>
       <span class="input-split">:</span>
       <div class="right-input">
@@ -44,7 +45,8 @@
           maxLength="2"
           class="custom-input"
           (keypress)="onKeyPress($event)"
-          [disabled]="!isNotPlay">
+          [disabled]="!isNotPlay"
+          [ngStyle]="{'background-color': setInputBackgroundColor()}">
       </div>
     </div>
   </div>

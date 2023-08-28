@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-count-up-toggle',
@@ -10,15 +11,18 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 export class CountUpToggleComponent {
 
   public countUpColor: ThemePalette = 'primary';
+
+  constructor(private readonly sharedService: SharedService) {}
   
   @Input() isDisableControl: boolean = false;
 
   public onCountUp(event: MatSlideToggleChange): void {
     const { checked } = event;
-    if (checked) {
-      console.log('countUp');
-    } else {
-      console.log('countDown');
-    }
+    console.log(checked);
+    this.updateCountUpState(checked);
+  }
+
+  private updateCountUpState(state: boolean): void {
+    this.sharedService.setData({ countup: state});
   }
 }

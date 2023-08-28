@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
 import { IPhase, PhaseState } from 'src/app/models/phase.model';
+import { TimerBackgroundColor } from 'src/app/models/state.model';
 
 import { SharedService } from 'src/app/services/shared.service';
 import { KeyPressUntils } from 'src/app/utils/key-press.util';
@@ -13,6 +14,7 @@ import { KeyPressUntils } from 'src/app/utils/key-press.util';
 })
 export class PhaseComponent implements OnInit, OnDestroy {
   
+  public isCountUp: boolean | undefined = false;
   private commonSubscription: Subscription = new Subscription();
   private _phaseItems: IPhase[] = [{
     opacity: '100%',
@@ -33,21 +35,21 @@ export class PhaseComponent implements OnInit, OnDestroy {
       this.commonSubscription.add(
         this.sharedService.getData()
           .subscribe(data => {
-            const { phases } = data;
+            const { phases, countup } = data;
             if (phases && !(phases === '0' || phases === '00')) {
               this.setPhases(phases);
             }
+            this.isCountUp = countup;
           })
       );
   }
 
   private setPhases(phasesCount: string): void {
-    console.log(phasesCount)
     const phaseItemsLength = this.phaseItems.length;
     const diffCount = parseInt(phasesCount, 10) - phaseItemsLength;
     if (diffCount >= 0) {
       this.phaseItems = [...this.phaseItems, ...this.makePhases(diffCount)];
-    } else if (diffCount < 0) {
+    } else {
       this.phaseItems.splice(diffCount);
     }
     this.updateBagesAndIndexes();
@@ -100,5 +102,9 @@ export class PhaseComponent implements OnInit, OnDestroy {
       }
       return { ...item, badge: index + 1 - shiftCount, index };
     });
+  }
+
+  public setInputBackgroundColor(): TimerBackgroundColor {
+    return this.isCountUp ? TimerBackgroundColor.Green : TimerBackgroundColor.Gray;
   }
 }

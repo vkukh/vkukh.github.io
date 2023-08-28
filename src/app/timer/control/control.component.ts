@@ -16,14 +16,16 @@ export class ControlComponent {
   public onTogglePlayPause(): void {
     this.isPlayActive = !this.isPlayActive;
     if (this.isPlayActive) {
-      console.log(this.isPlayActive);
+      console.log('Pause timer!');
     } else {
+      console.log('Start timer!');
       this.changeTimerState.emit(States.Play);
       this.isDisableControl = true;
     }
   }
 
   public onReplay(): void {
+    console.log('Replay timer!');
     this.changeTimerState.emit(States.RePlay);
     this.isDisableControl = false;
   }

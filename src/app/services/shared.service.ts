@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { AppControlState } from '../models/state.model';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { AppControlState } from '../models/state.model';
 })
 export class SharedService {
 
-  private sharedData = new BehaviorSubject<AppControlState>({});
+  private sharedData = new ReplaySubject<AppControlState>(1);
 
   public setData(newValue: AppControlState): void {
     this.sharedData.next(newValue);
