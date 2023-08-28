@@ -70,17 +70,14 @@ export class PhaseComponent implements OnInit, OnDestroy {
     return this.keyPressUtils.keyPress(event);
   }
 
-  public onStateChange(event: MatRadioChange):void {
+  public onStateChange(event: MatRadioChange, index: number): void {
     const { value } = event;
-    if (value) {
-      this.updateBagesAndIndexes();
-    }
+    if (value === PhaseState.Remove) this.removePhase(index);
+    this.updateBagesAndIndexes();
   }
 
-  public onRemovePhase(index: number): void {
-    if (!index) return;
+  public removePhase(index: number): void {
     this.phaseItems.splice(index, 1);
-    this.updateBagesAndIndexes();
   }
 
   private updateBagesAndIndexes(): void {

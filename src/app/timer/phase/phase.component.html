@@ -13,14 +13,13 @@
 
     <mat-radio-group 
       [(ngModel)]="phaseItems[i].state"
-      (change)="onStateChange($event)"
+      (change)="onStateChange($event, i)"
       *ngIf="isNotPlay">
       <mat-radio-button value="work">work</mat-radio-button>
       <mat-radio-button value="rest">rest</mat-radio-button>
       <mat-radio-button 
         value="remove"
-        (click)="onRemovePhase(i)"
-        [disabled]="!i ? true : false">
+        *ngIf="i ? true : false">
         remove
       </mat-radio-button>
     </mat-radio-group>
