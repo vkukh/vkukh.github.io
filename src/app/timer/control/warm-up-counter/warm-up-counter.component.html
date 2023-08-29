@@ -12,6 +12,7 @@
       matInput
       maxLength="2"
       [(ngModel)]="warmUpCount"
+      [ngStyle]="{'background-color': setInputBackgroundColor()}"
       class="custom-input"
       [disabled]="isDisableControl"
       (blur)="onInputChange($event)"
@@ -20,6 +21,7 @@
       mat-icon-button 
       color="primary"
       [disabled]="isDisableControl"
+      [ngStyle]="{'background-color': setInputBackgroundColor()}"
       (click)="onRemoveValue(warmUpCount)">
       <mat-icon>remove</mat-icon>
     </button>

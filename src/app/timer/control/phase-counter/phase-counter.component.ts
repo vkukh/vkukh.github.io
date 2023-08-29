@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { AppControlState } from 'src/app/models/state.model';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { TimerBackgroundColor } from 'src/app/models/state.model';
 import { SharedService } from 'src/app/services/shared.service';
 import { KeyPressUntils } from 'src/app/utils/key-press.util';
 import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
@@ -9,15 +10,33 @@ import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
   templateUrl: './phase-counter.component.html',
   styleUrls: ['./phase-counter.component.scss']
 })
-export class PhaseCounterComponent {
+export class PhaseCounterComponent implements OnInit, OnDestroy {
+  public isCountUp: boolean | undefined = false;
   private _phaseCount: string = '01';
   private nominal: number = 99
+  private commonSubscription: Subscription = new Subscription();
 
-  constructor(private readonly keyPressUtils: KeyPressUntils, 
+  constructor(private readonly keyPressUtils: KeyPressUntils,
     private readonly numberManipulationUtil: NumberManipulationUtil,
     private readonly sharedService: SharedService) {}
 
   @Input() isDisableControl: boolean = false;
+
+  ngOnInit(): void {
+    this.commonSubscription.add(
+      this.sharedService.getData()
+        .subscribe(data => {
+          const { countup } = data;
+          if (countup !== undefined) {
+            this.isCountUp = countup;
+          }
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.commonSubscription.unsubscribe();
+  }
 
   public set phaseCount(value: string) {
     if (!value) return;
@@ -47,5 +66,9 @@ export class PhaseCounterComponent {
 
   private updateAppControlState(phases: string): void {
     this.sharedService.setData({ phases });
+  }
+
+  public setInputBackgroundColor(): TimerBackgroundColor {
+    return this.isCountUp ? TimerBackgroundColor.Green : TimerBackgroundColor.Gray;
   }
 }

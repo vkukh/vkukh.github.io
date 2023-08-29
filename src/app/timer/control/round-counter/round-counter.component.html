@@ -15,11 +15,13 @@
       class="custom-input"
       [disabled]="isDisableControl"
       (blur)="onInputChange($event)"
+      [ngStyle]="{'background-color': setInputBackgroundColor()}"
       (keypress)="onKeyPress($event)">
     <button 
       mat-icon-button 
       color="primary"
       [disabled]="isDisableControl"
+      [ngStyle]="{'background-color': setInputBackgroundColor()}"
       (click)="onRemoveValue(roundCount)">
       <mat-icon>remove</mat-icon>
     </button>

@@ -13,6 +13,7 @@
       maxLength="2"
       [(ngModel)]="phaseCount"
       class="custom-input"
+      [ngStyle]="{'background-color': setInputBackgroundColor()}"
       [disabled]="isDisableControl"
       (blur)="onInputChange($event)"
       (keypress)="onKeyPress($event)">
@@ -20,6 +21,7 @@
       mat-icon-button 
       color="primary"
       [disabled]="isDisableControl"
+      [ngStyle]="{'background-color': setInputBackgroundColor()}"
       (click)="onRemoveValue(phaseCount)">
       <mat-icon>remove</mat-icon>
     </button>
