@@ -8,20 +8,16 @@
     matBadgePosition="before"
     [ngStyle]="{
       'border': phaseItems[i].state === 'rest' ? '3px solid red' : '3px solid blue',
-      'opacity': isNotPlay ? '100%' : '10%'
+      'opacity': isNotPlay || !i ? '100%' : '10%'
     }">
 
     <mat-radio-group 
       [(ngModel)]="phaseItems[i].state"
       (change)="onStateChange($event, i)"
-      *ngIf="isNotPlay">
+      *ngIf="isNotPlay && i">
       <mat-radio-button value="work">work</mat-radio-button>
       <mat-radio-button value="rest">rest</mat-radio-button>
-      <mat-radio-button 
-        value="remove"
-        *ngIf="i ? true : false">
-        remove
-      </mat-radio-button>
+      <mat-radio-button value="remove"> remove</mat-radio-button>
     </mat-radio-group>
 
     <div fxLayout="row" fxLayoutAlign="center center">
