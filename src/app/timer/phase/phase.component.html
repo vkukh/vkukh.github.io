@@ -6,6 +6,7 @@
     [matBadge]="phaseItems[i].badge"
     [matBadgeColor]="phaseItems[i].state === 'rest' ? 'warn' : 'primary'"
     matBadgePosition="before"
+    matBadgeSize="large"
     [ngStyle]="{
       'border': phaseItems[i].state === 'rest' ? '3px solid red' : '3px solid blue',
       'opacity': isNotPlay || !i ? '100%' : '10%'
