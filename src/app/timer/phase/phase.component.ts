@@ -27,7 +27,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
   private readonly REST_BADGE: string = 'R';
   
   constructor(private readonly sharedService: SharedService,
-    private readonly keyPressUtils: KeyPressUntils) {}
+    private keyPressUtils: KeyPressUntils) {}
 
   @Input() isNotPlay: boolean = true;
 
@@ -36,7 +36,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
         this.sharedService.getData()
           .subscribe(data => {
             const { phases, countup } = data;
-            if (phases && !(phases === '0' || phases === '00') && phases !== undefined) {
+            if (phases && !(phases === '0' || phases === '00') && parseInt(phases, 10)) {
               this.setPhases(phases);
             }
             if (countup !== undefined) {
@@ -81,7 +81,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
 		this.commonSubscription.unsubscribe();
   }
 
-  public onKeyPress(event: KeyboardEvent): void {
+  public onKeyPress(event: Event): void {
     return this.keyPressUtils.keyPress(event);
   }
 

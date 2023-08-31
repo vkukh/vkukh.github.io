@@ -16,7 +16,7 @@
       [disabled]="isDisableControl"
       (blur)="onInputChange($event)"
       [ngStyle]="{'background-color': setInputBackgroundColor()}"
-      (keypress)="onKeyPress($event)">
+      (input)="onKeyPress($event)">
     <button 
       mat-icon-button 
       color="primary"

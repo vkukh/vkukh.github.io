@@ -21,7 +21,8 @@ import { PhaseCounterComponent } from './timer/control/phase-counter/phase-count
 import { RoundCounterComponent } from './timer/control/round-counter/round-counter.component';
 import { WarmUpCounterComponent } from './timer/control/warm-up-counter/warm-up-counter.component';
 import { CountUpToggleComponent } from './timer/control/count-up-toggle/count-up-toggle.component';
-
+import { KeyPressUntils } from './utils/key-press.util';
+import { NumberManipulationUtil } from './utils/number-manipulation.util';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { CountUpToggleComponent } from './timer/control/count-up-toggle/count-up
     MatBadgeModule,
     MatRadioModule
   ],
-  providers: [SharedService],
+  providers: [SharedService, KeyPressUntils, NumberManipulationUtil],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

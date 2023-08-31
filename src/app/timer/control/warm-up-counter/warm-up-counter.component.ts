@@ -16,7 +16,7 @@ export class WarmUpCounterComponent implements OnInit, OnDestroy {
   private nominal: number = 60;
   private commonSubscription: Subscription = new Subscription();
 
-  constructor(private readonly keyPressUtils: KeyPressUntils, 
+  constructor(private keyPressUtils: KeyPressUntils, 
     private readonly numberManipulationUtil: NumberManipulationUtil,
     private readonly sharedService: SharedService) {}
 
@@ -59,7 +59,7 @@ export class WarmUpCounterComponent implements OnInit, OnDestroy {
     this.warmUpCount = this.numberManipulationUtil.removeValue(value, this.nominal);
   }
 
-  public onKeyPress(event: KeyboardEvent): void {
+  public onKeyPress(event: Event): void {
     return this.keyPressUtils.keyPress(event);
   }
 

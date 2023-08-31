@@ -16,7 +16,7 @@ export class RoundCounterComponent implements OnInit, OnDestroy {
   private nominal: number = 99;
   private commonSubscription: Subscription = new Subscription();
 
-  constructor(private readonly keyPressUtils: KeyPressUntils, 
+  constructor(private keyPressUtils: KeyPressUntils, 
     private readonly numberManipulationUtil: NumberManipulationUtil,
     private readonly sharedService: SharedService) {}
 
@@ -59,7 +59,7 @@ export class RoundCounterComponent implements OnInit, OnDestroy {
     this.roundCount = this.numberManipulationUtil.removeValue(value, this.nominal);
   }
 
-  public onKeyPress(event: KeyboardEvent): void {
+  public onKeyPress(event: Event): void {
     return this.keyPressUtils.keyPress(event);
   }
 

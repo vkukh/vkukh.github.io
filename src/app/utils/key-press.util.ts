@@ -4,10 +4,13 @@ import { Injectable } from "@angular/core";
 	providedIn: 'root'
 })
 export class KeyPressUntils {
-  public keyPress(event: KeyboardEvent): void {
-    const allowedKeys = /^[0-9]$/;
-    if (!event.key.match(allowedKeys)) {
+  public keyPress(event: Event): void {
+    const allowedKeys = /^[\d ]*$/;
+    const target = event.target as HTMLInputElement;
+
+    if (target && target.value && !target.value.match(allowedKeys)) {
       event.preventDefault();
+      target.value = target.value.replace(/[^\d]/, "");
     }
   }
 }

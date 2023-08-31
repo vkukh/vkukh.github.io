@@ -29,7 +29,7 @@
           [(ngModel)]="phaseItems[i].leftValue"
           maxLength="2"
           class="custom-input"
-          (keypress)="onKeyPress($event)"
+          (input)="onKeyPress($event)"
           [disabled]="!isNotPlay"
           [ngStyle]="{'background-color': setInputBackgroundColor()}">
       </div>
@@ -41,7 +41,7 @@
           [(ngModel)]="phaseItems[i].rightValue"
           maxLength="2"
           class="custom-input"
-          (keypress)="onKeyPress($event)"
+          (input)="onKeyPress($event)"
           [disabled]="!isNotPlay"
           [ngStyle]="{'background-color': setInputBackgroundColor()}">
       </div>
