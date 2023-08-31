@@ -6,6 +6,7 @@ import { TimerBackgroundColor } from 'src/app/models/state.model';
 
 import { SharedService } from 'src/app/services/shared.service';
 import { KeyPressUntils } from 'src/app/utils/key-press.util';
+import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
 
 @Component({
   selector: 'app-phase',
@@ -25,9 +26,11 @@ export class PhaseComponent implements OnInit, OnDestroy {
     badge: 1
   }];
   private readonly REST_BADGE: string = 'R';
+  private nominal: number = 59;
   
   constructor(private readonly sharedService: SharedService,
-    private keyPressUtils: KeyPressUntils) {}
+    private keyPressUtils: KeyPressUntils,
+    private readonly numberManipulationUtil: NumberManipulationUtil) {}
 
   @Input() isNotPlay: boolean = true;
 
@@ -83,6 +86,14 @@ export class PhaseComponent implements OnInit, OnDestroy {
 
   public onKeyPress(event: Event): void {
     return this.keyPressUtils.keyPress(event);
+  }
+
+  public onInputChangeLeft(event: Event, index: number): void {
+    this.phaseItems[index].leftValue = this.numberManipulationUtil.inputChange(event, this.nominal);
+  }
+
+  public onInputChangeRight(event: Event, index: number): void {
+    this.phaseItems[index].rightValue = this.numberManipulationUtil.inputChange(event, this.nominal);
   }
 
   public onStateChange(event: MatRadioChange, index: number): void {

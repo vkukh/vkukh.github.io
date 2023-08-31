@@ -13,7 +13,7 @@ import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
 export class WarmUpCounterComponent implements OnInit, OnDestroy {
   public isCountUp: boolean | undefined = false;
   private _warmUpCount: string = '01';
-  private nominal: number = 60;
+  private nominal: number = 59;
   private commonSubscription: Subscription = new Subscription();
 
   constructor(private keyPressUtils: KeyPressUntils, 

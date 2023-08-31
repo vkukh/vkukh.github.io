@@ -30,6 +30,7 @@
           maxLength="2"
           class="custom-input"
           (input)="onKeyPress($event)"
+          (blur)="onInputChangeLeft($event, i)"
           [disabled]="!isNotPlay"
           [ngStyle]="{'background-color': setInputBackgroundColor()}">
       </div>
@@ -42,6 +43,7 @@
           maxLength="2"
           class="custom-input"
           (input)="onKeyPress($event)"
+          (blur)="onInputChangeRight($event, i)"
           [disabled]="!isNotPlay"
           [ngStyle]="{'background-color': setInputBackgroundColor()}">
       </div>
