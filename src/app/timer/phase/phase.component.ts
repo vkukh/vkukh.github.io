@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
 import { IPhase, PhaseState } from 'src/app/models/phase.model';
-import { TimerBackgroundColor } from 'src/app/models/state.model';
+import { AppControlState, States, TimerBackgroundColor } from 'src/app/models/state.model';
 
 import { SharedService } from 'src/app/services/shared.service';
 import { TimerFactory } from 'src/app/services/timer-factory.service';
@@ -15,7 +15,7 @@ import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
   styleUrls: ['./phase.component.scss']
 })
 export class PhaseComponent implements OnInit, OnDestroy {
-  
+  public isDisable: boolean = false;
   public isCountUp: boolean | undefined = false;
   private commonSubscription: Subscription = new Subscription();
   private _phaseItems: IPhase[] = [{
@@ -28,29 +28,39 @@ export class PhaseComponent implements OnInit, OnDestroy {
   }];
   private readonly REST_BADGE: string = 'R';
   private nominal: number = 59;
+  private roundsCount: number = 1;
+  private warmUpTime: number = 10;
   
   constructor(private readonly sharedService: SharedService,
     private keyPressUtils: KeyPressUntils,
     private readonly numberManipulationUtil: NumberManipulationUtil,
-    private timerFactory: TimerFactory) {}
+    private timerFactory: TimerFactory) {};
 
-  @Input() isNotPlay: boolean = true;
+  @Input() set timerStatus(state: States) {
+    this.setTimerPanelDisabled(state);
+  }
 
   public ngOnInit(): void {
       this.commonSubscription.add(
         this.sharedService.getData()
-          .subscribe(data => {
-            const { phases, countup } = data;
+          .subscribe((data: AppControlState) => {
+            const { phases, countup, rounds, warmup } = data;
             if (phases && !(phases === '0' || phases === '00') && parseInt(phases, 10)) {
               this.setPhases(phases);
             }
             if (countup !== undefined) {
               this.isCountUp = countup;
             }
+            if (rounds !== undefined && parseInt(rounds, 10)) {
+              this.roundsCount = parseInt(rounds, 10);
+            }
+            if (warmup !== undefined && parseInt(warmup, 10)) {
+              this.warmUpTime = parseInt(warmup, 10);
+            }
           })
       );
-      const countDownTimer = this.timerFactory.createCountDownTimer({ minutes: 0, seconds: 10 });
-      countDownTimer.start();
+      // const countDownTimer = this.timerFactory.createCountDownTimer({ minutes: 0, seconds: 10 });
+      // countDownTimer.start(console.log);
   }
 
   private setPhases(phasesCount: string): void {
@@ -123,5 +133,15 @@ export class PhaseComponent implements OnInit, OnDestroy {
 
   public setInputBackgroundColor(): TimerBackgroundColor {
     return this.isCountUp ? TimerBackgroundColor.Green : TimerBackgroundColor.Gray;
+  }
+
+  private setTimerPanelDisabled(state: States): void {
+    if (state === States.Play) {
+      console.log(this.phaseItems.length);
+      console.log({ rounds: this.roundsCount, warmUp: this.warmUpTime })
+      this.isDisable = true;
+    } else if (state === States.RePlay) {
+      this.isDisable = false;
+    }
   }
 }

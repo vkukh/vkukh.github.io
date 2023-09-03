@@ -1,3 +1,11 @@
+<div 
+  fxLayout="row"
+  fxLayoutAlign="end" 
+  matBadgeSize="large"
+  [matBadge]="1"
+  matBadgeColor="warn"
+  *ngIf="isDisable">
+</div>
 <div fxLayout="column" fxLayoutAlign="center center">
     <div class="phase-item"
     *ngFor="let phase of phaseItems; let i = index;"
@@ -9,13 +17,13 @@
     matBadgeSize="large"
     [ngStyle]="{
       'border': phaseItems[i].state === 'rest' ? '3px solid red' : '3px solid blue',
-      'opacity': isNotPlay || !i ? '100%' : '10%'
+      'opacity': phaseItems[i].opacity
     }">
 
     <mat-radio-group 
       [(ngModel)]="phaseItems[i].state"
       (change)="onStateChange($event, i)"
-      *ngIf="isNotPlay && i">
+      *ngIf="!isDisable && i">
       <mat-radio-button value="work">work</mat-radio-button>
       <mat-radio-button value="rest">rest</mat-radio-button>
       <mat-radio-button value="remove"> remove</mat-radio-button>
@@ -31,7 +39,7 @@
           class="custom-input"
           (input)="onKeyPress($event)"
           (blur)="onInputChangeLeft($event, i)"
-          [disabled]="!isNotPlay"
+          [disabled]="isDisable"
           [ngStyle]="{'background-color': setInputBackgroundColor()}">
       </div>
       <span class="input-split">:</span>
@@ -44,7 +52,7 @@
           class="custom-input"
           (input)="onKeyPress($event)"
           (blur)="onInputChangeRight($event, i)"
-          [disabled]="!isNotPlay"
+          [disabled]="isDisable"
           [ngStyle]="{'background-color': setInputBackgroundColor()}">
       </div>
     </div>

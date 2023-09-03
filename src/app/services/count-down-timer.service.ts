@@ -26,22 +26,22 @@ export class CountDownTimerService {
     this._onEndFunction = null;
   }
 
-  pause() {
+  pause(): void {
     clearInterval(this.interval);
     this.interval = undefined;
   }
 
-  stop() {
+  stop(): void {
     this.pause();
     this.reset();
   }
 
-  reset() {
+  reset(): void {
     this.remainingMinutes = this.initialMinutes;
     this.remainingSeconds = this.initialSeconds;
   }
 
-  resume() {
+  resume(): void {
     this.start();
   }
 
@@ -59,7 +59,7 @@ export class CountDownTimerService {
     }
   }
 
-  getTime() {
+  getTime(): { minutes: string | undefined, seconds: string | undefined } {
     let minutes = this.remainingMinutes?.toString();
     let seconds = this.remainingSeconds?.toString();
     
@@ -70,14 +70,14 @@ export class CountDownTimerService {
       seconds = '0' + seconds;
     }
     
-    return `${minutes}:${seconds}`;
+    return { minutes,  seconds};
   }
 
   onTick() {
-    console.log(this.getTime());
+    return this.getTime();
   }
 
-  start() {
+  start(callback?: any): void {
     if (!this.interval) {
       this.interval = window.setInterval(() => {
         if (this.remainingMinutes && this.remainingSeconds === 0 && this.remainingMinutes > 0) {
@@ -86,8 +86,8 @@ export class CountDownTimerService {
         } else if(this.remainingSeconds) {
           this.remainingSeconds -= 1;
         }
-
-        this.onTick();
+        const time = this.onTick();
+        if (callback) callback(time);
 
         if (this.remainingMinutes === 0 && this.remainingSeconds === 0) {
           this.stop();

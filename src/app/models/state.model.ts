@@ -1,6 +1,6 @@
 export enum States {
   Play = 'play',
-  Stop = 'stop',
+  Pause = 'pause',
   RePlay = 'replay'
 }
 

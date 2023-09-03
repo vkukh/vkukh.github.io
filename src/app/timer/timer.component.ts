@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class TimerComponent implements OnInit, OnDestroy {
   public iconColor: string = StateColors.Green;
-  public isNotPlay: boolean = true;
+  public timerStatus: States = States.RePlay;
   public isCountUp: boolean | undefined = false;
   private commonSubscription: Subscription = new Subscription();
 
@@ -41,7 +41,8 @@ export class TimerComponent implements OnInit, OnDestroy {
       [States.RePlay]: () => this.iconColor = StateColors.Green
     }
     setState[state]?.();
-    this.isNotPlay = state !== States.Play;
+    console.log(state);
+    this.timerStatus = state;
   }
 
   public setTimerBackgroundColor(): TimerBackgroundColor {

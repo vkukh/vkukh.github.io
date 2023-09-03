@@ -12,7 +12,7 @@ import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
 })
 export class WarmUpCounterComponent implements OnInit, OnDestroy {
   public isCountUp: boolean | undefined = false;
-  private _warmUpCount: string = '01';
+  private _warmUpCount: string = '10';
   private nominal: number = 59;
   private commonSubscription: Subscription = new Subscription();
 
@@ -39,7 +39,7 @@ export class WarmUpCounterComponent implements OnInit, OnDestroy {
   }
 
   public set warmUpCount(value: string) {
-    // emit round count
+    this.sharedService.setData({ warmup: value });
     this._warmUpCount = value;
   }
 

@@ -10,6 +10,6 @@
     </mat-expansion-panel-header>
     <app-control (changeTimerState)="onStateReceived($event)"></app-control>
 
-    <app-phase [isNotPlay] = "isNotPlay"></app-phase>
+    <app-phase [timerStatus] = "timerStatus"></app-phase>
   </mat-expansion-panel>
 </mat-accordion>

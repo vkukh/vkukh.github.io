@@ -40,6 +40,7 @@ export class RoundCounterComponent implements OnInit, OnDestroy {
 
   public set roundCount(value: string) {
     // emit round count
+    this.sharedService.setData({ rounds: value });
     this._roundCount = value;
   }
 
