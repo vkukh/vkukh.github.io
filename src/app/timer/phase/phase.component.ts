@@ -5,6 +5,7 @@ import { IPhase, PhaseState } from 'src/app/models/phase.model';
 import { TimerBackgroundColor } from 'src/app/models/state.model';
 
 import { SharedService } from 'src/app/services/shared.service';
+import { TimerFactory } from 'src/app/services/timer-factory.service';
 import { KeyPressUntils } from 'src/app/utils/key-press.util';
 import { NumberManipulationUtil } from 'src/app/utils/number-manipulation.util';
 
@@ -30,7 +31,8 @@ export class PhaseComponent implements OnInit, OnDestroy {
   
   constructor(private readonly sharedService: SharedService,
     private keyPressUtils: KeyPressUntils,
-    private readonly numberManipulationUtil: NumberManipulationUtil) {}
+    private readonly numberManipulationUtil: NumberManipulationUtil,
+    private timerFactory: TimerFactory) {}
 
   @Input() isNotPlay: boolean = true;
 
@@ -47,6 +49,8 @@ export class PhaseComponent implements OnInit, OnDestroy {
             }
           })
       );
+      const countDownTimer = this.timerFactory.createCountDownTimer({ minutes: 0, seconds: 10 });
+      countDownTimer.start();
   }
 
   private setPhases(phasesCount: string): void {

@@ -1,98 +1,104 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
+
+import { ICountDownTimerConfig } from '../models/timer-config.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountDownTimerService {
 
-  constructor() { }
-}
+  private initialMinutes: number | undefined;
+  private initialSeconds: number | undefined;
+  private remainingMinutes: number | undefined;
+  private remainingSeconds: number | undefined;
+  private interval: number | undefined;
+  private _onEndFunction: (() => void) | null;
 
+  constructor(@Optional() @Inject('ICountDownTimerConfig') private config?: ICountDownTimerConfig) {
+    if (config) {
+      this.initialMinutes = this.config?.minutes;
+      this.initialSeconds = this.config?.seconds;
+      this.remainingMinutes = this.config?.minutes;
+      this.remainingSeconds = this.config?.seconds;
+    }
 
-// class Timer {
-//   constructor(minutes = 0, seconds = 0) {
-//     this.initialMinutes = minutes;
-//     this.initialSeconds = seconds;
-//     this.remainingMinutes = minutes;
-//     this.remainingSeconds = seconds;
-//     this.interval = null;
-//     this._onEndFunction = null;
-//   }
+    this.interval = undefined;
+    this._onEndFunction = null;
+  }
 
-//   pause() {
-//     clearInterval(this.interval);
-//     this.interval = null;
-//   }
+  pause() {
+    clearInterval(this.interval);
+    this.interval = undefined;
+  }
 
-//   stop() {
-//     this.pause();
-//     this.reset();
-//   }
+  stop() {
+    this.pause();
+    this.reset();
+  }
 
-//   reset() {
-//     this.remainingMinutes = this.initialMinutes;
-//     this.remainingSeconds = this.initialSeconds;
-//   }
+  reset() {
+    this.remainingMinutes = this.initialMinutes;
+    this.remainingSeconds = this.initialSeconds;
+  }
 
-//   resume() {
-//     this.start();
-//   }
+  resume() {
+    this.start();
+  }
 
-//   set onEnd(callback) {
-//     if (typeof callback === "function") {
-//       this._onEndFunction = callback;
-//     } else {
-//       throw new Error('"onEnd" must be a function');
-//     }
-//   }
+  set onEnd(callback) {
+    if (typeof callback === "function") {
+      this._onEndFunction = callback;
+    } else {
+      throw new Error('"onEnd" must be a function');
+    }
+  }
   
-//   get onEnd() {
-//     if (this._onEndFunction) {
-//       this._onEndFunction();
-//     }
-//   }
+  get onEnd() {
+    if (this._onEndFunction) {
+      return this._onEndFunction();
+    }
+  }
 
-//   getTime() {
-//     let minutes = this.remainingMinutes.toString();
-//     let seconds = this.remainingSeconds.toString();
+  getTime() {
+    let minutes = this.remainingMinutes?.toString();
+    let seconds = this.remainingSeconds?.toString();
     
-//     if (minutes.length < 2) {
-//       minutes = '0' + minutes;
-//     }
-//     if (seconds.length < 2) {
-//       seconds = '0' + seconds;
-//     }
+    if (minutes && minutes.length < 2) {
+      minutes = '0' + minutes;
+    }
+    if (seconds && seconds.length < 2) {
+      seconds = '0' + seconds;
+    }
     
-//     return `${minutes}:${seconds}`;
-//   }
+    return `${minutes}:${seconds}`;
+  }
 
-//   onTick() {
-//     console.log(this.getTime());
-//   }
+  onTick() {
+    console.log(this.getTime());
+  }
 
-//   start() {
-//     if (!this.interval) {
-//       this.interval = setInterval(() => {
-//         if (this.remainingSeconds === 0 && this.remainingMinutes > 0) {
-//           this.remainingMinutes -= 1;
-//           this.remainingSeconds = 59;
-//         } else {
-//           this.remainingSeconds -= 1;
-//         }
+  start() {
+    if (!this.interval) {
+      this.interval = window.setInterval(() => {
+        if (this.remainingMinutes && this.remainingSeconds === 0 && this.remainingMinutes > 0) {
+          this.remainingMinutes -= 1;
+          this.remainingSeconds = 59;
+        } else if(this.remainingSeconds) {
+          this.remainingSeconds -= 1;
+        }
 
-//         // Вызываем метод onTick для вывода времени в реальном времени
-//         this.onTick();
+        this.onTick();
 
-//         if (this.remainingMinutes === 0 && this.remainingSeconds === 0) {
-//           this.stop();
-//           if (typeof this.onEnd === "function") {
-//             this.onEnd();
-//           }
-//         }
-//       }, 1000);
-//     }
-//   }
-// }
+        if (this.remainingMinutes === 0 && this.remainingSeconds === 0) {
+          this.stop();
+          if (typeof this.onEnd === "function") {
+            this.onEnd;
+          }
+        }
+      }, 1000);
+    }
+  }
+}
 
 // function startTimersSequentially(timers) {
 //   if (timers.length === 0) return;
